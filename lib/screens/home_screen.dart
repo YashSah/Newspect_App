@@ -3,12 +3,14 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_flutter/consts/vars.dart';
 import 'package:news_flutter/provider/dark_theme_provider.dart';
+import 'package:news_flutter/widgets/articles_widget.dart';
 import 'package:news_flutter/widgets/drawer_widget.dart';
 import 'package:news_flutter/widgets/tabs.dart';
 import 'package:news_flutter/widgets/vertical_spacing.dart';
 import 'package:provider/provider.dart';
 
 import '../services/utils.dart';
+import '../widgets/loading_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -46,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
+
             Row(children: [
               TabsWidget(
                 text: 'All News',
@@ -61,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 },
                 fontSize: newsType == NewsType.allNews ? 22 : 14),
-              SizedBox(width: 25,),
+              const SizedBox(width: 25,),
               TabsWidget(
                   text: 'Top Trending',
                   color: newsType == NewsType.topTrending
@@ -78,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: newsType == NewsType.topTrending ? 22 : 14),
               ],
             ),
-            VerticalSpacing(10),
+            const VerticalSpacing(10),
             newsType == NewsType.topTrending ? Container() : SizedBox(
               height: kBottomNavigationBarHeight,
               child: Row(
@@ -132,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {
                       currentPageIndex += 1;
                     });
-                    print('$currentPageIndex index');
+                    //print('$currentPageIndex index');
                   },),
                 ],
               ),
@@ -152,9 +155,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       onChanged: (String? value) {}),
                 ),
               ),
-            )
-            ],
-          ),
+            ),
+            LoadingWidget(),
+          ]),
         ),
       ),
     );
